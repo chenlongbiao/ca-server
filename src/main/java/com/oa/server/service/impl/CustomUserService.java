@@ -8,10 +8,12 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class CustomUserService implements UserDetailsService {
 
     @Autowired
@@ -26,8 +28,7 @@ public class CustomUserService implements UserDetailsService {
         }
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
         //用于添加用户的权限。只要把用户权限添加到authorities 就万事大吉。
-        for(SysRole role:user.getRoles())
-        {
+        for(SysRole role:user.getRoles()){
             authorities.add(new SimpleGrantedAuthority(role.getName()));
             System.out.println(role.getName());
         }

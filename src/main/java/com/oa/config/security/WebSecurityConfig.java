@@ -30,7 +30,7 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter{
                 .anyRequest().authenticated() //任何请求,登录后可以访问
                 .and()
                 .formLogin()
-                .loginPage("/login")
+                .loginPage("/login.html")
                 .failureUrl("/login?error")
                 .permitAll() //登录页面用户任意访问
                 .and()

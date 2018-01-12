@@ -5,7 +5,7 @@
         <id property="id" column="ID"/>
         <result property="username" column="username"/>
         <result property="password" column="PASSWORD"/>
-        <collection property="roles" ofType="com.us.example.domain.SysRole">
+        <collection property="roles" ofType="com.oa.server.domain.SysRole">
             <result column="name" property="name"/>
         </collection>
     </resultMap>
