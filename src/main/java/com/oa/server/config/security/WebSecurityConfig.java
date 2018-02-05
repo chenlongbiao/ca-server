@@ -1,8 +1,7 @@
-package com.oa.config.security;
+package com.oa.server.config.security;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.oa.server.domain.SysUser;
 import com.oa.server.service.impl.CustomUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -10,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
@@ -44,6 +44,11 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter{
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(customUserService()); //user Details Service验证
     }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/login.html", "/static/**");
+    }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
@@ -55,16 +60,13 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter{
                         return o;
                     }
                 })
-                .antMatchers("/", "/login.html").permitAll() //登录页面用户任意访问
-                .anyRequest().authenticated() //任何请求,登录后可以访问
                 .and()
                 .formLogin()
-                .loginPage("/login_p")
+                .loginPage("/login.html")
                 .loginProcessingUrl("/login")
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .failureUrl("/login?error")
-                .permitAll() //登录页面用户任意访问
                 .successHandler(new AuthenticationSuccessHandler() {
                     @Override
                     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {

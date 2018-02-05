@@ -1,8 +1,7 @@
-package com.oa.config.security;
+package com.oa.server.config.security;
 
-import org.sang.bean.Menu;
-import org.sang.bean.Role;
-import org.sang.service.MenuService;
+import com.oa.server.domain.Permission;
+import com.oa.server.service.impl.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
@@ -20,30 +19,30 @@ import java.util.List;
 @Component
 public class UrlFilterInvocationSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
     @Autowired
-    MenuService menuService;
+    PermissionService permissionService;
     AntPathMatcher antPathMatcher = new AntPathMatcher();
 
     @Override
     public Collection<ConfigAttribute> getAttributes(Object o) throws IllegalArgumentException {
         //获取请求地址
         String requestUrl = ((FilterInvocation) o).getRequestUrl();
-        if ("/login_p".equals(requestUrl)) {
+        if ("/index.html".equals(requestUrl)) {
             return null;
         }
-        List<Menu> allMenu = menuService.getAllMenu();
-        for (Menu menu : allMenu) {
-            if (antPathMatcher.match(menu.getUrl(), requestUrl)&&menu.getRoles().size()>0) {
-                List<Role> roles = menu.getRoles();
-                int size = roles.size();
-                String[] values = new String[size];
-                for (int i = 0; i < size; i++) {
-                    values[i] = roles.get(i).getName();
-                }
-                return SecurityConfig.createList(values);
-            }
+        List<Permission> allPermission = permissionService.findAllPermission();
+        for (Permission permission : allPermission) {
+//            if (antPathMatcher.match(permission.getUrl(), requestUrl)&&permission.getRoles().size()>0) {
+//                List<Role> roles = menu.getRoles();
+//                int size = roles.size();
+//                String[] values = new String[size];
+//                for (int i = 0; i < size; i++) {
+//                    values[i] = roles.get(i).getName();
+//                }
+//                return SecurityConfig.createList(values);
+//            }
         }
         //没有匹配上的资源，都是登录访问
-        return SecurityConfig.createList("ROLE_LOGIN");
+        return SecurityConfig.createList("ROLE_ADMIN");
     }
 
     @Override

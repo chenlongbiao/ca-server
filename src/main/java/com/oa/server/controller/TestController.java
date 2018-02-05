@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 public class TestController {
 
-    @RequestMapping("/a")
-    public String login(HttpServletRequest request) {
-        return "123";
-    }
+//    @RequestMapping("/login_p")
+//    public String login(HttpServletRequest request) {
+//        return "123";
+//    }
 }

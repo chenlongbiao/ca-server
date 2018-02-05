@@ -1,4 +1,4 @@
-package com.oa.config.security;
+package com.oa.server.config.security;
 
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDeniedException;
