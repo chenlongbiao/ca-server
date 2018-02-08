@@ -1,7 +1,10 @@
 package com.oa.server.config.security;
 
+import com.oa.server.dao.SysRoleDao;
 import com.oa.server.domain.Permission;
+import com.oa.server.domain.SysRole;
 import com.oa.server.service.impl.PermissionService;
+import com.oa.server.service.impl.SysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
@@ -19,7 +22,7 @@ import java.util.List;
 @Component
 public class UrlFilterInvocationSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
     @Autowired
-    PermissionService permissionService;
+    SysRoleService sysRoleService;
     AntPathMatcher antPathMatcher = new AntPathMatcher();
 
     @Override
@@ -29,20 +32,15 @@ public class UrlFilterInvocationSecurityMetadataSource implements FilterInvocati
         if ("/index.html".equals(requestUrl)) {
             return null;
         }
-        List<Permission> allPermission = permissionService.findAllPermission();
-        for (Permission permission : allPermission) {
-//            if (antPathMatcher.match(permission.getUrl(), requestUrl)&&permission.getRoles().size()>0) {
-//                List<Role> roles = menu.getRoles();
-//                int size = roles.size();
-//                String[] values = new String[size];
-//                for (int i = 0; i < size; i++) {
-//                    values[i] = roles.get(i).getName();
-//                }
-//                return SecurityConfig.createList(values);
-//            }
+        List<SysRole> allRole = sysRoleService.findAllRole();
+        for (SysRole role : allRole) {
+            if (antPathMatcher.match(role.getUrl(), requestUrl)) {
+                String name = role.getName();
+                return SecurityConfig.createList(name);
+            }
         }
         //没有匹配上的资源，都是登录访问
-        return SecurityConfig.createList("ROLE_ADMIN");
+        return SecurityConfig.createList("ROLE_LOGIN");
     }
 
     @Override

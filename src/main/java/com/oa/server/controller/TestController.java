@@ -5,12 +5,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @RestController
 public class TestController {
 
-//    @RequestMapping("/login_p")
-//    public String login(HttpServletRequest request) {
-//        return "123";
-//    }
+    @RequestMapping("/admin")
+    public String test(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        return "123";
+    }
+    @RequestMapping("/login")
+    public String login(HttpServletRequest request) {
+        return "123";
+    }
 }

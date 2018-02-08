@@ -5,6 +5,8 @@
         <id property="id" column="ID"/>
         <result property="username" column="username"/>
         <result property="password" column="PASSWORD"/>
+        <result property="phone" column="phone"/>
+        <result property="mail" column="mail"/>
         <collection property="roles" ofType="com.oa.server.domain.SysRole">
             <result column="name" property="name"/>
         </collection>

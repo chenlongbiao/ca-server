@@ -1,10 +1,13 @@
 package com.oa.server.domain;
 
+import java.io.Serializable;
+
 /**
  * Created by 陈龙飚 on 18/1/29.
  */
-public class Permission {
+public class Permission implements Serializable {
 
+    private static final long serialVersionUID = -2731083566396710049L;
     private int id;
     //权限名称
     private String name;

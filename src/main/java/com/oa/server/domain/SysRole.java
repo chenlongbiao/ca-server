@@ -1,9 +1,31 @@
 package com.oa.server.domain;
 
-public class SysRole {
+import java.io.Serializable;
 
+public class SysRole implements Serializable {
+
+    private static final long serialVersionUID = -3846303358514585278L;
     private Integer id;
     private String name;
+    private String url;
+    private String desc;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
     public Integer getId() {
         return id;
     }

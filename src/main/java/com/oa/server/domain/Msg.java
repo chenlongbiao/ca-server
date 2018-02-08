@@ -1,6 +1,8 @@
 package com.oa.server.domain;
 
-public class Msg {
+import java.io.Serializable;
+
+public class Msg implements Serializable {
     private String title;
     private String content;
     private String etraInfo;

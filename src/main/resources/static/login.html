@@ -31,11 +31,17 @@
                 <input class="password"/>
             </div>
             <button class="login_btt" onclick="login()">登录</button>
+            <button class="login_btt" onclick="test()">test</button>
     </div>
 </body>
 <script type="text/javascript">
     function login() {
         $.post("/login",{username: "123" , password: "123"},function (test) {
+            console.log(test)
+        });
+    }
+    function test() {
+        $.post("/admin",{username: "123" , password: "123"},function (test) {
             console.log(test)
         });
     }
