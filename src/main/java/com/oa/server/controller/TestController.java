@@ -15,8 +15,4 @@ public class TestController {
         HttpSession session = request.getSession();
         return "123";
     }
-    @RequestMapping("/login")
-    public String login(HttpServletRequest request) {
-        return "123";
-    }
 }
