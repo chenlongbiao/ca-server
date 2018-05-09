@@ -31,7 +31,7 @@ public class WsControll {
     }
 
     @MessageMapping("/more")
-    @SendTo("/topic/getResponse")
+    @SendTo("/resp/getResponse")
     public ResponseMessage say(RequestMessage message) {
         System.out.println(message.getName());
         return new ResponseMessage("welcome," + message.getName() + " !");

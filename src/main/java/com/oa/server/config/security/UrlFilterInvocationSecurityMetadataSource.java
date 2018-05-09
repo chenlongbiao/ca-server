@@ -1,9 +1,6 @@
 package com.oa.server.config.security;
 
-import com.oa.server.dao.SysRoleDao;
-import com.oa.server.domain.Permission;
 import com.oa.server.domain.SysRole;
-import com.oa.server.service.impl.PermissionService;
 import com.oa.server.service.impl.SysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.ConfigAttribute;
