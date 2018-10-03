@@ -29,6 +29,9 @@ public class UrlFilterInvocationSecurityMetadataSource implements FilterInvocati
         if ("/index.html".equals(requestUrl)) {
             return null;
         }
+        if ("/swagger-ui.html".equals(requestUrl)) {
+            return null;
+        }
         List<SysRole> allRole = sysRoleService.findAllRole();
         for (SysRole role : allRole) {
             if (antPathMatcher.match(role.getUrl(), requestUrl)) {

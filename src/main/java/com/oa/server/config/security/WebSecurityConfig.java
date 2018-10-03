@@ -47,7 +47,15 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter{
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/login.html", "/static/**");
+        web.ignoring()
+        .antMatchers("/**/login.html")
+        .antMatchers("/**/*.html")
+        .antMatchers( "/**/*.js")
+        .antMatchers( "/**/*.css")
+        .antMatchers( "/**/ui")
+        .antMatchers( "/**/swagger-resources**/**")
+        .antMatchers( "/**/v2/**")
+        .antMatchers( "/**/*.png");
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
