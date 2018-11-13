@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @RestController
-public class TestController {
+public class TestController1 {
 
     @RequestMapping("/admin")
     public String test(HttpServletRequest request) {
